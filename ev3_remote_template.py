@@ -1,6 +1,7 @@
 import rpyc
 from rpyc.utils.server import ThreadedServer
 from ev3dev2.led import Leds
+from time import sleep
 
 class RobotService(rpyc.Service):
     def exposed_speak_message(self, msg):
