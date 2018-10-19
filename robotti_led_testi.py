@@ -3,24 +3,16 @@ from ev3dev2.led import Leds
 from time import sleep
 
 leds = Leds()
-led_colour = "AMBER"
+led_colour_left = "AMBER"
+led_colour_right = "RED"
 
 leds.all_off() # Turn all LEDs off
 sleep(1)
 
 # Set both pairs of LEDs to amber
-leds.set_color('LEFT', led_colour)
-print("\nLED color set to")
-leds.set_color('RIGHT', led_colour)
+leds.set_color('LEFT', led_colour_left)
+print("\nLED color set to " + led_colour_left)
+leds.set_color('RIGHT', led_colour_right)
+print("\nLED color set to " + led_colour_right)
 sleep(4)
-
-# With custom colors:
-leds.set_color('LEFT', (1, 0)) # Bright Red.
-leds.set_color('RIGHT', (0, 1)) # Bright green.
-sleep(4)
-
-leds.set_color('LEFT', (1, 0.01)) # Does not work correctly
-leds.set_color('RIGHT', (0.01, 1)) # Does not work correctly
-sleep(4)
-
 
