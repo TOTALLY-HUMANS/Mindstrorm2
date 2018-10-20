@@ -14,7 +14,7 @@ class LineFollower(RobotBehaviourThread):
             if self.line_found():
                 self.move(0, 60)
                 self.set_turning_to(0)
-            elif self.turning == 1 and (time.time() - self.started_turning) >= 4:
+            elif not (self.turning == 1 and (time.time() - self.started_turning) >= 4):
                 self.move(-90, 60)
                 self.set_turning_to(1)
             else:
