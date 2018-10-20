@@ -24,5 +24,5 @@ class LineFollower(RobotBehaviourThread):
 
     def set_turning_to(self, turn):
         if self.turning != turn:
-            self.turning = turn;
+            self.turning = turn
             self.started_turning = time.time()
