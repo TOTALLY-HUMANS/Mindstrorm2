@@ -35,7 +35,7 @@ class LineFollower(RobotBehaviourThread):
                 self.move(straight, moveSpeed)
                 time.sleep(0.3)
                 self.move(0, -moveSpeed)
-                time.sleep(1.5)
+                time.sleep(1.4)
                 self.stop_movement()
                 time.sleep(5)
                 first_turn = left
