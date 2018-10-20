@@ -9,7 +9,7 @@ class DiscTraveler(RobotBehaviourThread):
         print("Starting disc traveler...")
         
         self.move(0, 60)
-        time.sleep(2)
+        time.sleep(1)
         self.stop_movement()
         self.turn_degrees(70, -1)
 
