@@ -14,7 +14,7 @@ class LineFollower(RobotBehaviourThread):
         left = -90
         right = 90
 
-        turnTimer = 1.6
+        turnTimer = 1.7
         turnSpeed = 20
         moveSpeed = 60
 
