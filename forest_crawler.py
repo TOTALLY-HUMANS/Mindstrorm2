@@ -13,13 +13,16 @@ class ForestCrawler(RobotBehaviourThread):
                 angles, distances = self.scan_room()
                 print("DONE SCANNING ROOM...")
 
+                print(angles)
+                print(distances)
+
                 angle_to_use = self.find_longest_open_space(angles, distances)
                 print("FOOFOOFOO")
                 print(angle_to_use)
                 if angle_to_use == 0:
                     angle_to_use = self.gyroscope.angle
                     print("ANGLE WAS 0")
-                    
+
                 angle_to_use = angle_to_use - self.gyroscope.angle
                 print(angle_to_use)
                 self.turn_degrees(abs(angle_to_use), angle_to_use)
@@ -78,7 +81,6 @@ class ForestCrawler(RobotBehaviourThread):
             if distance >= long_distance_threshold:
                 if not long_distance_hole:
                     start_of_current_longest_distance = index
-                    print("foo")
 
                 long_distance_hole = True
                 current_longest_distance += 1
