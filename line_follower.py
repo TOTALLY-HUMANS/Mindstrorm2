@@ -19,12 +19,15 @@ class LineFollower(RobotBehaviourThread):
         moveSpeed = 60
 
         first_turn = left
+        first_turn_always_left = False
 
         while not self.stopped():
             color = self.get_color()
             if color == 6:
-                if self.turning == left:
+                if self.turning == left or first_turn_always_left:
                     first_turn = left
+                    if first_turn_always_left and (time.time() - self.started_turning) > 1.4:
+                        first_turn_always_left = False
                 elif self.turning == right:
                     first_turn = right
                 self.move(straight, moveSpeed)
@@ -37,11 +40,13 @@ class LineFollower(RobotBehaviourThread):
                 self.move(0, -moveSpeed)
                 time.sleep(1.4)
                 self.stop_movement()
-                time.sleep(5)
+                time.sleep(9)
                 first_turn = left
                 self.move(first_turn, turnSpeed)
                 time.sleep(0.5)
                 self.set_turning_to(first_turn)
+                first_turn_always_left = True
+
             elif (not self.turning == -first_turn) and (self.turning == straight or (time.time() - self.started_turning) <= turnTimer):
                 self.move(first_turn, turnSpeed)
                 self.set_turning_to(first_turn)
