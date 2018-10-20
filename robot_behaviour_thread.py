@@ -31,9 +31,17 @@ class RobotBehaviourThread(threading.Thread):
         self.move_steering.on(angle, SpeedPercent(speed))
 
     def turn_degrees(self, degrees, direction):
-        direction_actual = -100 if degrees <= 0 else 100
+        initial_angle = self.gyroscope.angle
+
+        direction_actual = -100 if direction <= 0 else 100        
         self.move(direction_actual, 40)
-        self.gyroscope.wait_until_angle_changed_by(degrees)
+
+        print("rotating")
+        print(initial_angle)
+        while self.gyroscope.angle < initial_angle + degrees and self.gyroscope.angle > initial_angle - degrees:
+            pass
+
+        print("done rotating")
         self.stop_movement()
 
     def stop_movement(self):
