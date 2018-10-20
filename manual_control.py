@@ -11,13 +11,13 @@ class ManualControl():
     def start_direction(self, direction):
         self.direction = direction
         if self.direction == 'up':
-            self.move(0, 60)
+            self.move(0, 70)
         elif self.direction == 'down':
-            self.move(0, -60)
+            self.move(0, -70)
         elif self.direction == 'left':
-            self.move(-90, 60)
+            self.move(-90, 70)
         elif self.direction == 'right':
-            self.move(90, 60)
+            self.move(90, 70)
 
     def stop_direction(self, direction):
         if direction and self.direction == direction:
