@@ -5,6 +5,9 @@ from rpyc.utils.server import ThreadedServer
 from line_follower import LineFollower
 from pause import Pause
 from forest_crawler import ForestCrawler
+from cube_carrier import CubeCarrier
+from disc_traveler import DiscTraveler
+from slope_searcher import SlopeSearcher
 from manual_control import ManualControl
 from battlemode import BattleMode
 
