@@ -1,4 +1,5 @@
 from robot_behaviour_thread import RobotBehaviourThread
+import time
 
 class ForestCrawler(RobotBehaviourThread):
     def __init__(self, callback=None):
@@ -29,14 +30,14 @@ class ForestCrawler(RobotBehaviourThread):
             if self.wall_near():
                 print("WALL NEAR!")
                 self.stop_movement()
-                move(0, -20)
-                sleep(0.1)
+                self.move(0, -20)
+                time.sleep(0.5)
                 self.stop_movement()
                 scan_surroundings = True
 
             if not scan_surroundings:
                 print("moving")
-                move(0, 30)
+                self.move(0, 30)
 
             
 
