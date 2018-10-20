@@ -36,7 +36,7 @@ class LineFollower(RobotBehaviourThread):
                 time.sleep(0.3)
                 self.move(0, -moveSpeed)
                 time.sleep(2)
-                first_turn = left
+                first_turn = right
                 self.move(first_turn, turnSpeed)
                 self.set_turning_to(first_turn)
                 time.sleep(0.5)
@@ -72,6 +72,7 @@ class LineFollower(RobotBehaviourThread):
 
     def get_color(self):
         self.color_sensor.mode = 'COL-COLOR'
+        print(self.color_sensor.value())
         return self.color_sensor.value()
 
 
