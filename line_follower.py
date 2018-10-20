@@ -21,12 +21,12 @@ class LineFollower(RobotBehaviourThread):
         first_turn = left
 
         while not self.stopped():
+            self.print_color()
             if self.line_found():
                 if self.turning == left:
                     first_turn = left
                 elif self.turning == right:
                     first_turn = right
-
                 self.move(straight, moveSpeed)
                 self.set_turning_to(straight)
             elif (not self.turning == -first_turn) and (self.turning == straight or (time.time() - self.started_turning) <= turnTimer):
@@ -64,5 +64,19 @@ class LineFollower(RobotBehaviourThread):
 
     def red_found(self):
         self.color_sensor.mode = 'COL-COLOR'
-        print(self.color_sensor.value())
         return self.color_sensor.value() == 5
+
+    def print_reflect(self):
+        self.color_sensor.mode = 'COL-REFLECT'
+        print("REFLECT: " + str(self.color_sensor.reflected_light_intensity))
+        
+    def print_color(self):
+        self.color_sensor.mode = 'COL-COLOR'
+        print("COLOR: " + str(self.color_sensor.value()))
+
+
+        # Lattia 1 (joskus 2)
+        # Viiva 6
+        # Oranssi 6
+        # Tumma oranssi 5
+        # Keltainen 4

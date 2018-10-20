@@ -7,6 +7,5 @@ class DiscTraveler(RobotBehaviourThread):
 
     def run(self):
         print("Starting disc traveler...")
-
-        while not self.stopped():
-            pass
+        self.move(-20, 20)
+        
