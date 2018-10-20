@@ -50,6 +50,18 @@ class RobotService(rpyc.Service):
             print("Creating Forest Crawler...")
             self.thread = ForestCrawler(self.change_mode)
             self.thread.start()
+        elif self.mode == 'Cube Carrier':
+            print("Creating Cube Carrier...")
+            self.thread = CubeCarrier(self.change_mode)
+            self.thread.start()
+        elif self.mode == 'Disc Traveler':
+            print("Creating Disc Traveler...")
+            self.thread = DiscTraveler(self.change_mode)
+            self.thread.start()
+        elif self.mode == 'Slope Searcher':
+            print("Creating Slope Searcher...")
+            self.thread = SlopeSearcher(self.change_mode)
+            self.thread.start()
         elif self.mode == 'Battle Mode':
             print("Engaging Battle Mode...")
             self.thread = BattleMode(self.change_mode)
