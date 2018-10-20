@@ -60,7 +60,7 @@ class BattleMode(RobotBehaviourThread):
         print("In position")
 
     def check_touch_sensor_status(self):
-        return self.infrared_sensor.proximity < 5
+        return self.touch_sensor.is_pressed
 
     def edge_detected(self):
         # Track the edges of the platform
