@@ -18,13 +18,16 @@ class ForestCrawler(RobotBehaviourThread):
     def scan_room(self):
         angles = []
         distances = []
-        print("1")
-        self.turn_degrees(-90)
-        print("2")
+        print("turning 90...")
+        self.turn_degrees(90)
+        print("turned 90")
         initial_angle = self.gyroscope.angle
         self.move(100, 50)
 
         while self.gyroscope.angle < initial_angle + 180 and self.gyroscope.angle > initial_angle - 180:
+            print(initial_angle)
+            print(self.gyroscope.angle)
+            print("--")
             angles.append(self.gyroscope.angle)
             distances.append(self.infrared_sensor.distance)
 
