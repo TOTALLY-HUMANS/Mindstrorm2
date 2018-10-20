@@ -58,4 +58,5 @@ class LineFollower(RobotBehaviourThread):
         
     def red_found(self):
         self.color_sensor.mode = 'COL-COLOR'
+        print(self.color_sensor.value())
         return self.color_sensor.value() == 5
