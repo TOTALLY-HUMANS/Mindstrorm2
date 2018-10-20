@@ -10,6 +10,7 @@ class ForestCrawler(RobotBehaviourThread):
         #while not self.stopped():
 
         angles, distances = self.scan_room()
+        print("Done scanning room...")
         
         angle_to_use = find_longest_open_space(angles, distances)
         print(angle_to_use)
@@ -29,9 +30,14 @@ class ForestCrawler(RobotBehaviourThread):
         initial_angle = self.gyroscope.angle
         self.move(100, 50)
 
+        print("GOGOGOGOGOGOGO")
+        print(initial_angle)
+
         while self.gyroscope.angle < initial_angle + 180 and self.gyroscope.angle > initial_angle - 180:
             angles.append(self.gyroscope.angle)
             distances.append(self.infrared_sensor.distance)
+
+        print("DEBUG POINT 1")
 
         return angles, distances
 
