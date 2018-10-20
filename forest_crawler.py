@@ -31,7 +31,7 @@ class ForestCrawler(RobotBehaviourThread):
                 print("WALL NEAR!")
                 self.stop_movement()
                 self.move(0, -20)
-                time.sleep(0.5)
+                time.sleep(1)
                 self.stop_movement()
                 scan_surroundings = True
 
@@ -47,7 +47,7 @@ class ForestCrawler(RobotBehaviourThread):
 
         self.turn_degrees(90, -1)
         initial_angle = self.gyroscope.angle
-        self.move(100, 20)
+        self.move(100, 10)
 
         while self.gyroscope.angle < initial_angle + 180 and self.gyroscope.angle > initial_angle - 180:
             angles.append(self.gyroscope.angle)
@@ -59,7 +59,7 @@ class ForestCrawler(RobotBehaviourThread):
 
 
     def wall_near(self):
-        return self.infrared_sensor.proximity < 5
+        return self.infrared_sensor.proximity < 10
 
 
     def find_longest_open_space(self, angles, distances):
