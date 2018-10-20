@@ -14,7 +14,7 @@ class LineFollower(RobotBehaviourThread):
         left = -90
         right = 90
 
-        turnTimer = 1.5
+        turnTimer = 1.6
         turnSpeed = 20
         moveSpeed = 60
 
@@ -45,6 +45,7 @@ class LineFollower(RobotBehaviourThread):
                 self.move(left, turnSpeed)
                 time.sleep(turnTimer)
                 self.set_turning_to(straight)
+                self.stop_movement()
                 break
 
         self.callback("Forest Crawler")
