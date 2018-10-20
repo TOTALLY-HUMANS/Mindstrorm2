@@ -42,3 +42,8 @@ class RobotBehaviourThread(threading.Thread):
 
     def stop_movement(self):
         self.move_steering.off(brake=True)
+
+    def get_color(self):
+        self.color_sensor.mode = 'COL-COLOR'
+        print(self.color_sensor.value())
+        return self.color_sensor.value()

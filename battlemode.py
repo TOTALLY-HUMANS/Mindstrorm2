@@ -6,7 +6,6 @@ from time import sleep
 class BattleMode(RobotBehaviourThread):
 
     leds = Leds()
-    
 
     def __init__(self, callback=None):
         super().__init__(callback)
@@ -64,9 +63,23 @@ class BattleMode(RobotBehaviourThread):
 
     def edge_detected(self):
         # Track the edges of the platform
+        # get_color(self):
+        # self.color_sensor.mode = 'COL-REFLECT'
+        # return self.color_sensor.reflected_light_intensity < 5
+
+        self.color_sensor.mode = 'COL-COLOR'
+        i = 1
+        for i in range(3):
+            edge_color = self.get_color()
+            if edge_color == 0
+                return True
+            
+        return False
+
+
+    def print_reflect(self):
         self.color_sensor.mode = 'COL-REFLECT'
-        return self.color_sensor.reflected_light_intensity < 5
-        
+        print("REFLECT: " + str(self.color_sensor.reflected_light_intensity))
 
     def change_color(self):
         # Change LED to colors suitable for battle
