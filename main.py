@@ -6,6 +6,7 @@ from line_follower import LineFollower
 from pause import Pause
 from forest_crawler import ForestCrawler
 from manual_control import ManualControl
+from battlemode import BattleMode
 
 class RobotService(rpyc.Service):
     mode = None
