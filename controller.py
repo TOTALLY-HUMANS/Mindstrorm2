@@ -3,7 +3,8 @@ from pynput import keyboard
 
 class Controller():
     def __init__(self):
-        self.conn = rpyc.connect('192.168.2.2', port=18812)
+        self.conn = rpyc.connect('ev3dev', port=18812)
+        print("Connected")
 
     def start(self):
         self.listener = keyboard.Listener(
@@ -17,13 +18,17 @@ class Controller():
         self.listener.stop()
 
     def on_press(self, key):
-        self.stop()
+        #self.stop()
         try:
-            self.conn.root.line_follower()
+            char = key.char
+            print("Pressed " + char)
+            if char == '1':
+                self.conn.root.line_follower()
+                print("Started line follower")
         except AttributeError:
             # key is special key
             pass
-        self.start()
+        #self.start()
 
     def on_release(self, key):
         #
