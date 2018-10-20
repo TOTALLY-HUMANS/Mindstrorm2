@@ -71,7 +71,7 @@ class BattleMode(RobotBehaviourThread):
         i = 1
         for i in range(3):
             edge_color = self.get_color()
-            if edge_color == 0
+            if (edge_color == 0):
                 return True
             
         return False
