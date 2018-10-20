@@ -22,11 +22,13 @@ class BattleMode(RobotBehaviourThread):
         while not self.stopped():
             # Drive circles until enemy contact
             if self.check_touch_sensor_status() and not enemy_in_range:
+                print("Enemy in range")
                 self.move(0, 99)
                 enemy_in_range = True
 
             if enemy_in_range:
                 if not self.check_touch_sensor_status():
+                    print("ENEMY ELIMINATED")
                     self.stop_movement()
                     self.move(0, -30)
                     sleep(1)
@@ -35,6 +37,7 @@ class BattleMode(RobotBehaviourThread):
                     self.move(30, 60)
 
             if self.edge_detected():
+                print("EDGE DETECTED")
                 self.stop_movement()
 
                 for i in range(3):
@@ -67,11 +70,11 @@ class BattleMode(RobotBehaviourThread):
         # Change LED to colors suitable for battle
 
         # Turn all LEDs off
-        leds.all_off()
+        self.leds.all_off()
         sleep(1)
 
         # Set both pairs of LEDs to red (as for blood of the enemies)
-        leds.set_color('LEFT', 'RED')
-        leds.set_color('RIGHT', 'RED')
+        self.leds.set_color('LEFT', 'RED')
+        self.leds.set_color('RIGHT', 'RED')
 
     
