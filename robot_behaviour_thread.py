@@ -9,6 +9,7 @@ class RobotBehaviourThread(threading.Thread):
     color_sensor = ColorSensor(INPUT_4)
     color_sensor.mode = ColorSensor.MODE_COL_REFLECT
     infrared_sensor = InfraredSensor(INPUT_1)
+    infrared_sensor.mode = 'IR-PROX'
     gyroscope = GyroSensor(INPUT_3)
     #touch_sensor = TouchSensor(INPUT_2)
 
