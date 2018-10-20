@@ -13,7 +13,7 @@ class LineFollower(RobotBehaviourThread):
         straight = 0
         left = -90
         right = 90
-        
+
         turnTimer = 1
         turnSpeed = 30
         moveSpeed = 60
@@ -32,12 +32,12 @@ class LineFollower(RobotBehaviourThread):
             elif (not self.turning == -first_turn) and (self.turning == straight or (time.time() - self.started_turning) <= turnTimer):
                 self.move(first_turn, turnSpeed)
                 self.set_turning_to(first_turn)
-            elif self.turning == -first_turn and (time.time() - self.started_turning) <= turnTimer:
+            elif self.turning != -first_turn or (time.time() - self.started_turning) <= (2 * turnTimer):
                 self.move(-first_turn, turnSpeed)
                 self.set_turning_to(-first_turn)
             else:
                 self.move(first_turn, turnSpeed)
-                time.sleep(turnTimer / 2)
+                time.sleep(turnTimer)
                 self.move(straight, moveSpeed)
                 time.sleep(0.3)
                 self.move(0, -moveSpeed)
@@ -52,15 +52,15 @@ class LineFollower(RobotBehaviourThread):
         if self.turning != turn:
             self.turning = turn
             self.started_turning = time.time()
-    
+
     def line_found(self):
         self.color_sensor.mode = 'COL-REFLECT'
         return self.color_sensor.reflected_light_intensity > 30
-        
+
     def yellow_found(self):
         self.color_sensor.mode = 'COL-COLOR'
         return self.color_sensor.value() == 4
-        
+
     def red_found(self):
         self.color_sensor.mode = 'COL-COLOR'
         print(self.color_sensor.value())
