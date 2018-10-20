@@ -35,7 +35,7 @@ class ForestCrawler(RobotBehaviourThread):
 
         while self.gyroscope.angle < initial_angle + 180 and self.gyroscope.angle > initial_angle - 180:
             angles.append(self.gyroscope.angle)
-            distances.append(self.infrared_sensor.distance())
+            distances.append(self.infrared_sensor.distance(1))
 
         self.stop_movement()
 
