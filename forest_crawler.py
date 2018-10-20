@@ -13,8 +13,9 @@ class ForestCrawler(RobotBehaviourThread):
         print("DONE SCANNING ROOM...")
         
         print(angles)
+        print(distances)
 
-        angle_to_use = find_longest_open_space(angles, distances)
+        angle_to_use = self.find_longest_open_space(angles, distances)
         print("FOOFOOFOO")
         print(angle_to_use)
         angle_to_use = self.gyroscope.angle - angle_to_use
@@ -35,7 +36,7 @@ class ForestCrawler(RobotBehaviourThread):
 
         while self.gyroscope.angle < initial_angle + 180 and self.gyroscope.angle > initial_angle - 180:
             angles.append(self.gyroscope.angle)
-            distances.append(self.infrared_sensor.distance())
+            distances.append(self.infrared_sensor.distance(1))
 
         self.stop_movement()
 
