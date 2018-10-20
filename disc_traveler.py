@@ -8,7 +8,9 @@ class DiscTraveler(RobotBehaviourThread):
     def run(self):
         print("Starting disc traveler...")
         initial_angle = self.gyroscope.angle
+        self.move(0, 60)
+        time.sleep(0.5)
+
         while not self.stopped():
             angle = self.gyroscope.angle
             self.move(-(initial_angle - angle), 20)
-        
