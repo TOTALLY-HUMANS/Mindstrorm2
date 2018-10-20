@@ -29,7 +29,13 @@ class LineFollower(RobotBehaviourThread):
                     first_turn = right
                 self.move(straight, moveSpeed)
                 self.set_turning_to(straight)
-            elif color == 4:
+            elif (not self.turning == -first_turn) and (self.turning == straight or (time.time() - self.started_turning) <= turnTimer):
+                self.move(first_turn, turnSpeed)
+                self.set_turning_to(first_turn)
+            elif self.turning != -first_turn or (time.time() - self.started_turning) <= (2.2 * turnTimer):
+                self.move(-first_turn, turnSpeed)
+                self.set_turning_to(-first_turn)
+            else:
                 self.move(first_turn, turnSpeed)
                 time.sleep(turnTimer * 1.3)
                 self.move(straight, moveSpeed)
@@ -40,12 +46,6 @@ class LineFollower(RobotBehaviourThread):
                 self.move(first_turn, turnSpeed)
                 self.set_turning_to(first_turn)
                 time.sleep(0.5)
-            elif (not self.turning == -first_turn) and (self.turning == straight or (time.time() - self.started_turning) <= turnTimer):
-                self.move(first_turn, turnSpeed)
-                self.set_turning_to(first_turn)
-            elif self.turning != -first_turn or (time.time() - self.started_turning) <= (2.2 * turnTimer):
-                self.move(-first_turn, turnSpeed)
-                self.set_turning_to(-first_turn)
 
         #self.callback("Forest Crawler")
 
