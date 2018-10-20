@@ -10,6 +10,7 @@ class BattleMode(RobotBehaviourThread):
 
     def __init__(self, callback=None):
         super().__init__(callback)
+        print("INIT")
 
     def run(self):
         enemy_in_range = False

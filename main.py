@@ -6,6 +6,7 @@ from line_follower import LineFollower
 from pause import Pause
 from forest_crawler import ForestCrawler
 from manual_control import ManualControl
+from battlemode import BattleMode
 
 class RobotService(rpyc.Service):
     mode = None
@@ -63,7 +64,7 @@ class RobotService(rpyc.Service):
             self.thread = SlopeSearcher(self.change_mode)
             self.thread.start()
         elif self.mode == 'Battle Mode':
-            print("Created Battle Mode...")
+            print("Creating Battle Mode...")
             self.thread = BattleMode(self.change_mode)
             self.thread.start()
         elif self.mode == 'Pause':
