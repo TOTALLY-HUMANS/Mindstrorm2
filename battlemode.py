@@ -18,7 +18,7 @@ class BattleMode(RobotBehaviourThread):
         print("Battlemode engaged...")
 
         self.enter_thunderdome()
-        self.move(30, 60)
+        self.move(-25, 60)
 
         while not self.stopped():
             # Drive circles until enemy contact
@@ -40,6 +40,8 @@ class BattleMode(RobotBehaviourThread):
             if self.edge_detected():
                 print("EDGE DETECTED")
                 self.stop_movement()
+                self.move(0, -45)
+                sleep(1)
 
                 for i in range(3):
                     self.turn_degrees(90, 1)
@@ -54,7 +56,7 @@ class BattleMode(RobotBehaviourThread):
         # Enter battle positions
         print("Entering Thunderdome")
         self.move(0, 30)
-        sleep(5)
+        sleep(7)
         self.stop_movement()
         print("In position")
 
