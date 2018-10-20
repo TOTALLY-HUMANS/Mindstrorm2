@@ -9,6 +9,7 @@ class RobotBehaviourThread(threading.Thread):
     color_sensor = ColorSensor(INPUT_4)
     color_sensor.mode = ColorSensor.MODE_COL_REFLECT
     gyroscope = GyroSensor()
+    ultrasonic_sensor = UltrasonicSensor(INPUT_1)
 
 
     def __init__(self, callback=None):
