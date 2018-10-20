@@ -8,7 +8,7 @@ class RobotBehaviourThread(threading.Thread):
     move_steering = MoveSteering(OUTPUT_B, OUTPUT_C)
     color_sensor = ColorSensor(INPUT_4)
     color_sensor.mode = ColorSensor.MODE_COL_REFLECT
-    infrared_mode = InfraredSensor(INPUT_1)
+    infrared_sensor = InfraredSensor(INPUT_1)
     gyroscope = GyroSensor(INPUT_3)
     #touch_sensor = TouchSensor(INPUT_2)
 
@@ -33,7 +33,7 @@ class RobotBehaviourThread(threading.Thread):
     def turn_degrees(self, degrees):
         direction = -100 if degrees <= 0 else 100
         self.move(direction, 50)
-        gyroscope.wait_until_angle_changed_by(degrees)
+        self.gyroscope.wait_until_angle_changed_by(degrees)
         self.stop_movement()
 
     def stop_movement(self):

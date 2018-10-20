@@ -10,13 +10,13 @@ class ForestCrawler(RobotBehaviourThread):
         
         #while not self.stopped():
 
-        angles, distances = scan_room()
+        angles, distances = self.scan_room()
         print(angles)
         print(distances)
             
             
 
-    def scan_room():
+    def scan_room(self):
         angles = []
         distances = []
         self.turn_degrees(-90)
@@ -25,7 +25,7 @@ class ForestCrawler(RobotBehaviourThread):
 
         while self.gyroscope.angle < initial_angle + 180:
             angles.append(self.gyroscope.angle)
-            distances.append(self.ultrasonic_sensor.distance_centimeters)
+            distances.append(self.infrared_sensor.distance)
 
         return angles, distances
             

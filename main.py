@@ -5,6 +5,7 @@ from rpyc.utils.server import ThreadedServer
 from line_follower import LineFollower
 from pause import Pause
 from forest_crawler import ForestCrawler
+from manual_control import ManualControl
 
 class RobotService(rpyc.Service):
     mode = None
@@ -42,7 +43,9 @@ class RobotService(rpyc.Service):
             self.thread = LineFollower(self.change_mode)
             self.thread.start()
         elif self.mode == 'Manual Control':
+            print("Starting manual control...")
             self.thread = ManualControl(args)
+            print("Manual control started")
         elif self.mode == 'Forest Crawler':
             print("Creating Forest Crawler...")
             self.thread = ForestCrawler(self.change_mode)
