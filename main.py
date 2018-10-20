@@ -51,7 +51,7 @@ class RobotService(rpyc.Service):
             self.thread = ForestCrawler(self.change_mode)
             self.thread.start()
         elif self.mode == 'Battle Mode':
-            print("Engaging Battle Mode...")
+            print("Created Battle Mode...")
             self.thread = BattleMode(self.change_mode)
             self.thread.start()
         elif self.mode == 'Pause':
