@@ -35,11 +35,13 @@ class LineFollower(RobotBehaviourThread):
                 self.move(straight, moveSpeed)
                 time.sleep(0.3)
                 self.move(0, -moveSpeed)
-                time.sleep(2)
+                time.sleep(1.5)
+                self.stop_movement()
+                time.sleep(5)
                 first_turn = left
                 self.move(first_turn, turnSpeed)
-                self.set_turning_to(first_turn)
                 time.sleep(0.5)
+                self.set_turning_to(first_turn)
             elif (not self.turning == -first_turn) and (self.turning == straight or (time.time() - self.started_turning) <= turnTimer):
                 self.move(first_turn, turnSpeed)
                 self.set_turning_to(first_turn)
@@ -69,12 +71,6 @@ class LineFollower(RobotBehaviourThread):
     def print_reflect(self):
         self.color_sensor.mode = 'COL-REFLECT'
         print("REFLECT: " + str(self.color_sensor.reflected_light_intensity))
-
-    def get_color(self):
-        self.color_sensor.mode = 'COL-COLOR'
-        print(self.color_sensor.value())
-        return self.color_sensor.value()
-
 
         # Lattia 1 (joskus 2)
         # Viiva 6

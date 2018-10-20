@@ -45,5 +45,5 @@ class RobotBehaviourThread(threading.Thread):
 
     def get_color(self):
         self.color_sensor.mode = 'COL-COLOR'
-        print(self.color_sensor.value())
+        #print(self.color_sensor.value())
         return self.color_sensor.value()
