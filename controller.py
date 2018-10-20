@@ -8,7 +8,8 @@ class Controller():
     def __init__(self):
         while conn is None:
             try:
-                self.conn = rpyc.connect('192.168.2.2', port=18812)
+                self.conn = rpyc.connect('ev3dev', port=18812)
+                print("Connected")
             except ConnectionRefusedError:
                 pass
 
@@ -25,7 +26,11 @@ class Controller():
             return
 
         try:
-            doing = rpyc.asyn(self.conn.root.line_follower())
+            char = key.char
+            print("Pressed " + char)
+            if char == '1':
+                doing = rpyc.asyn(self.conn.root.line_follower())
+                print("Started line follower")
         except AttributeError:
             # key is special key
             pass
