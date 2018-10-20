@@ -16,9 +16,12 @@ class ForestCrawler(RobotBehaviourThread):
                 angle_to_use = self.find_longest_open_space(angles, distances)
                 print("FOOFOOFOO")
                 print(angle_to_use)
+                if angle_to_use == 0:
+                    angle_to_use = self.gyroscope.angle
+                    print("ANGLE WAS 0")
+                    
                 angle_to_use = angle_to_use - self.gyroscope.angle
                 print(angle_to_use)
-                self.stop_movement()
                 self.turn_degrees(abs(angle_to_use), angle_to_use)
 
                 scan_surroundings = False
