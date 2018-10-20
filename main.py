@@ -10,9 +10,9 @@ class RobotService(rpyc.Service):
     mode = None
     thread = None
 
-    def exposed_change_mode(self, mode):
+    def exposed_change_mode(self, mode, args=None):
         print("Mode change command: " + mode)
-        
+
         if self.mode == mode:
             return
 
@@ -21,25 +21,34 @@ class RobotService(rpyc.Service):
             self.thread.stop()
             self.thread.join()
 
-        self.change_mode(mode)
-        
+        self.change_mode(mode, args)
 
-    def change_mode(self, mode):
+    def exposed_start_direction(self, direction):
+        if self.mode == 'Manual Control':
+            self.thread.start_direction(direction)
+
+    def exposed_stop_direction(self, direction):
+        if self.mode == 'Manual Control':
+            self.thread.stop_direction(direction)
+
+    def change_mode(self, mode, args=None):
         self.mode = mode
         print("Changing mode...")
         if self.mode == 'Line Follower':
             print("Creating Line Follower...")
             self.thread = LineFollower(self.change_mode)
             self.thread.start()
-        if self.mode == 'Forest Crawler':
+        elif self.mode == 'Manual Control':
+            self.thread = ManualControl(args)
+        elif self.mode == 'Forest Crawler':
             print("Creating Forest Crawler...")
             self.thread = ForestCrawler(self.change_mode)
             self.thread.start()
-        if self.mode == 'Pause':
+        elif self.mode == 'Pause':
             print("Pausing...")
             self.thread = Pause()
             self.thread.start()
-        if self.mode == 'Stop':
+        elif self.mode == 'Stop':
             print("Stop")
 
 if __name__ == '__main__':
