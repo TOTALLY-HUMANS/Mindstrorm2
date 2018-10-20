@@ -7,11 +7,6 @@ class DiscTraveler(RobotBehaviourThread):
 
     def run(self):
         print("Starting disc traveler...")
-        
-        self.move(0, 60)
-        time.sleep(1)
-        self.stop_movement()
-        self.turn_degrees(70, -1)
 
         initial_angle = self.gyroscope.angle
 
@@ -19,10 +14,11 @@ class DiscTraveler(RobotBehaviourThread):
 
             if not self.ultrasonic_sensor.distance_centimeters < 5:
                 angle = self.gyroscope.angle
-                delta = abs(initial_angle) - abs(angle) if initial_angle > angle else abs(angle) - abs(initial_angle)
-                align = 1 if initial_angle > angle else -1
+                delta = (initial_angle - angle) % 360
 
-                self.move(align * delta, 33)
+                self.move(-1 * (delta / 3.6), 60)
+            else:
+                self.stop_movement()
 
 
                 

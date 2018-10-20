@@ -23,10 +23,9 @@ class ForestCrawler(RobotBehaviourThread):
                     angle_to_use = self.gyroscope.angle
                     print("ANGLE WAS 0")
 
-                angle = self.gyroscope.angle
-                delta = abs(angle_to_use) - abs(angle) if angle_to_use > angle else abs(angle) - abs(angle_to_use)
-                print(abs(delta))
-                self.turn_degrees(abs(delta), -1)
+                angle_to_use = angle_to_use - self.gyroscope.angle
+                print(abs(angle_to_use))
+                self.turn_degrees(abs(angle_to_use), -1)
                 scan_surroundings = False
                 print(scan_surroundings)
 
