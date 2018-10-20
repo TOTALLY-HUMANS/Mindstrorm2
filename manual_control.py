@@ -18,7 +18,7 @@ class ManualControl():
             self.move(90, 0)
 
     def stop_direction(self, direction):
-        if self.direction == direction:
+        if direction and self.direction == direction:
             self.stop_movement()
             self.direction = None
 
