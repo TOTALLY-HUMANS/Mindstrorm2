@@ -3,15 +3,14 @@ from pynput import keyboard
 
 class Controller():
     conn = None
-    doing = None
 
     def __init__(self):
-        while conn is None:
+        while self.conn is None:
             try:
                 self.conn = rpyc.connect('ev3dev', port=18812)
                 print("Connected")
             except ConnectionRefusedError:
-                pass
+                print("Retrying...")
 
     def start(self):
         self.listener = keyboard.Listener(
@@ -22,21 +21,25 @@ class Controller():
         self.listener.join()
 
     def on_press(self, key):
-        if doing and not doing.ready:
-            return
-
         try:
             char = key.char
             print("Pressed " + char)
             if char == '1':
-                doing = rpyc.asyn(self.conn.root.line_follower())
+                print("Starting line follower...")
+                rpyc.async_(self.conn.root.change_mode)('Line Follower')
                 print("Started line follower")
-        except AttributeError:
+            elif char == '2':
+                print("Starting forest crawler...")
+                rpyc.async_(self.conn.root.change_mode)('Forest Crawler')
+                print("Started forest crawler")
+        except AttributeError as e:
             # key is special key
+            print(e)
             pass
 
     def on_release(self, key):
         #
+        print(key)
         pass
 
 if __name__ == '__main__':
