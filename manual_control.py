@@ -1,4 +1,4 @@
-from ev3dev2.motor import OUTPUT_B, OUTPUT_C, MoveSteering
+from ev3dev2.motor import OUTPUT_B, OUTPUT_C, MoveSteering, SpeedPercent
 
 class ManualControl():
     move_steering = MoveSteering(OUTPUT_B, OUTPUT_C)
