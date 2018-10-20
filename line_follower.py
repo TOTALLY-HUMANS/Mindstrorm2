@@ -48,7 +48,7 @@ class LineFollower(RobotBehaviourThread):
                 self.stop_movement()
                 break
 
-        self.callback("Forest Crawler")
+        #self.callback("Forest Crawler")
 
     def set_turning_to(self, turn):
         if self.turning != turn:
