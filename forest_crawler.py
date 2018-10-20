@@ -13,9 +13,6 @@ class ForestCrawler(RobotBehaviourThread):
                 angles, distances = self.scan_room()
                 print("DONE SCANNING ROOM...")
 
-                print(angles)
-                print(distances)
-
                 angle_to_use = self.find_longest_open_space(angles, distances)
                 print("FOOFOOFOO")
                 print(angle_to_use)
@@ -24,12 +21,13 @@ class ForestCrawler(RobotBehaviourThread):
                     print("ANGLE WAS 0")
 
                 angle_to_use = angle_to_use - self.gyroscope.angle
-                print(angle_to_use)
+                print(abs(angle_to_use))
                 self.turn_degrees(abs(angle_to_use), angle_to_use)
-
                 scan_surroundings = False
+                print(scan_surroundings)
 
             if self.wall_near():
+                print("WALL NEAR!")
                 self.stop_movement()
                 move(0, -20)
                 sleep(0.1)
@@ -37,6 +35,7 @@ class ForestCrawler(RobotBehaviourThread):
                 scan_surroundings = True
 
             if not scan_surroundings:
+                print("moving")
                 move(0, 30)
 
             
