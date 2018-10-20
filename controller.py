@@ -49,6 +49,12 @@ class Controller():
                 return False
             elif char == 'w':
                 self.change_mode('Pause')
+            elif char == 'l' and not self.clawlift:
+                self.start_manual_control('clawlift')
+                self.clawlift = True
+            elif char == 'o' and not self.clawlower:
+                self.start_manual_control('clawlower')
+                self.clawlower = True
 
         except AttributeError as e:
             if key == Key.up and not self.updown:
@@ -65,18 +71,28 @@ class Controller():
                 self.rightdown = True
 
     def on_release(self, key):
-        if key == Key.up:
-            self.stop_manual_control('up')
-            self.updown = False
-        elif key == Key.down:
-            self.stop_manual_control('down')
-            self.downdown = False
-        elif key == Key.left:
-            self.stop_manual_control('left')
-            self.leftdown = False
-        elif key == Key.right:
-            self.stop_manual_control('right')
-            self.rightdown = False
+        try:
+            char = key.char
+            if char == 'l':
+                self.stop_manual_control('clawlift')
+                self.clawlift = False
+            elif char == 'o':
+                self.stop_manual_control('clawlower')
+                self.clawlower = False
+
+        except AttributeError as e:
+            if key == Key.up:
+                self.stop_manual_control('up')
+                self.updown = False
+            elif key == Key.down:
+                self.stop_manual_control('down')
+                self.downdown = False
+            elif key == Key.left:
+                self.stop_manual_control('left')
+                self.leftdown = False
+            elif key == Key.right:
+                self.stop_manual_control('right')
+                self.rightdown = False
 
     def change_mode(self, mode, args=None):
         self.mode = mode
