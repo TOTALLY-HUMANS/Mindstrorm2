@@ -14,7 +14,7 @@ class LineFollower(RobotBehaviourThread):
         left = -90
         right = 90
 
-        firstTurnTimer = 0.3
+        firstTurnTimer = 0.5
         secondTurnTimer = 1.0
         turnTimer = firstTurnTimer
         turnSpeed = 30
@@ -38,6 +38,8 @@ class LineFollower(RobotBehaviourThread):
                 self.move(-first_turn, turnSpeed)
                 self.set_turning_to(-first_turn)
             elif turnTimer == firstTurnTimer:
+                self.move(first_turn, turnSpeed)
+                time.sleep(turnTimer * 1.1)
                 self.set_turning_to(straight)
                 turnTimer = secondTurnTimer
             else:
