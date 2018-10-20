@@ -49,11 +49,11 @@ class Controller():
     def on_release(self, key):
         if e.key == Key.up:
             self.stop_manual_control('up')
-        elif: e.key == Key.down:
+        elif e.key == Key.down:
             self.stop_manual_control('down')
-        elif: e.key == Key.left:
+        elif e.key == Key.left:
             self.stop_manual_control('left')
-        elif: e.key == Key.right:
+        elif e.key == Key.right:
             self.stop_manual_control('right')
 
     def change_mode(self, mode):
