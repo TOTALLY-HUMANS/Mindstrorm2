@@ -51,7 +51,7 @@ class BattleMode(RobotBehaviourThread):
                 
 
             
-            
+
     def enter_thunderdome(self):
         # Enter battle positions
         print("Entering Thunderdome")
