@@ -10,19 +10,37 @@ class LineFollower(RobotBehaviourThread):
 
     def run(self):
         print("Starting line follower...")
+        straight = 0
+        left = -90
+        right = 90
+        
+        turnTimer = 1
+        turnSpeed = 30
+        moveSpeed = 60
+
+        first_turn = left
+
         while not self.stopped():
             if self.line_found():
-                self.move(0, 60)
-                self.set_turning_to(0)
-            elif not (self.turning == 1 and (time.time() - self.started_turning) >= 4):
-                self.move(-90, 60)
-                self.set_turning_to(1)
+                if self.turning == left:
+                    first_turn = left
+                elif self.turning == right
+                    first_turn = right
+
+                self.move(straight, moveSpeed)
+                self.set_turning_to(straight)
+            elif (not self.turning == right) and (self.turning == straight or (time.time() - self.started_turning) <= turnTimer):
+                self.move(left, turnSpeed)
+                self.set_turning_to(left)
             else:
-                self.move(90, 60)
-                self.set_turning_to(-1)
+                self.move(right, turnSpeed)
+                self.set_turning_to(right)
         self.callback("Forest Crawler")
 
     def set_turning_to(self, turn):
         if self.turning != turn:
             self.turning = turn
             self.started_turning = time.time()
+    
+    def line_found(self):
+        return self.color_sensor.reflected_light_intensity > 30
