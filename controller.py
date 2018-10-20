@@ -5,6 +5,10 @@ from pynput.keyboard import Key
 class Controller():
     conn = None
     mode = None
+    updown = False
+    downdown = False
+    leftdown = False
+    rightdown = False
 
     def __init__(self):
         while self.conn is None:
@@ -37,26 +41,32 @@ class Controller():
                 self.change_mode('Pause')
 
         except AttributeError as e:
-            print(key)
-            if key == Key.up:
+            if key == Key.up and not self.updown:
                 self.start_manual_control('up')
-            elif key == Key.down:
+                self.updown = True
+            elif key == Key.down and not self.downdown:
                 self.start_manual_control('down')
-            elif key == Key.left:
+                self.downdown = True
+            elif key == Key.left and not self.leftdown:
                 self.start_manual_control('left')
-            elif key == Key.right:
+                self.leftdown = True
+            elif key == Key.right and not self.rightdown:
                 self.start_manual_control('right')
+                self.rightdown = True
 
     def on_release(self, key):
-        print(key)
         if key == Key.up:
             self.stop_manual_control('up')
+            self.updown = False
         elif key == Key.down:
             self.stop_manual_control('down')
+            self.downdown = False
         elif key == Key.left:
             self.stop_manual_control('left')
+            self.leftdown = False
         elif key == Key.right:
             self.stop_manual_control('right')
+            self.rightdown = False
 
     def change_mode(self, mode, args=None):
         self.mode = mode
