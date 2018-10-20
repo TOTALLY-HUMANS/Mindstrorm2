@@ -53,7 +53,7 @@ class ForestCrawler(RobotBehaviourThread):
 
 
     def wall_near(self):
-        False
+        return self.infrared_sensor.proximity < 5
 
 
     def find_longest_open_space(self, angles, distances):
