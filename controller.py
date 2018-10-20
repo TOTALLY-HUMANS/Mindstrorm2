@@ -32,6 +32,16 @@ class Controller():
                 print("Starting forest crawler...")
                 rpyc.async_(self.conn.root.change_mode)('Forest Crawler')
                 print("Started forest crawler")
+            elif char == 'q':
+                print("Stopping...")
+                rpyc.async_(self.conn.root.change_mode)('Stop')
+                print("Stopped")
+                return False
+            elif char == 'w':
+                print("Pausing...")
+                rpyc.async_(self.conn.root.change_mode)('Pause')
+                print("Paused")
+                
         except AttributeError as e:
             # key is special key
             print(e)
