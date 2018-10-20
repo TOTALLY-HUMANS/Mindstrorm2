@@ -1,7 +1,7 @@
-from ev3dev2.motor import OUTPUT_A, OUTPUT_B, OUTPUT_C, MoveSteering, SpeedPercent, Motor
+from ev3dev2.motor import OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D, MoveSteering, SpeedPercent, ServoMotor, Motor, MediumMotor
 
 class ManualControl():
-    claw_movement = Motor(OUTPUT_A)
+    claw_movement = MediumMotor(OUTPUT_D)
     move_steering = MoveSteering(OUTPUT_B, OUTPUT_C)
     direction = None
 
