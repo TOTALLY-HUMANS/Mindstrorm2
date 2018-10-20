@@ -13,8 +13,9 @@ class ForestCrawler(RobotBehaviourThread):
         print("DONE SCANNING ROOM...")
         
         print(angles)
+        print(distances)
 
-        angle_to_use = find_longest_open_space(angles, distances)
+        angle_to_use = self.find_longest_open_space(angles, distances)
         print("FOOFOOFOO")
         print(angle_to_use)
         angle_to_use = self.gyroscope.angle - angle_to_use
