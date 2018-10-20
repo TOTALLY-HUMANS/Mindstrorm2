@@ -9,6 +9,8 @@ class Controller():
     downdown = False
     leftdown = False
     rightdown = False
+    clawlift = False
+    clawlower = False
 
     def __init__(self):
         while self.conn is None:

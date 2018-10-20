@@ -19,6 +19,8 @@ class ManualControl():
             self.move(-90, 70)
         elif self.direction == 'right':
             self.move(90, 70)
+        elif self.direction == "lower":
+        elif self.direction == "lift":
 
     def stop_direction(self, direction):
         if direction and self.direction == direction:
