@@ -49,10 +49,10 @@ class Controller():
                 return False
             elif char == 'w':
                 self.change_mode('Pause')
-            elif char == 'l':
+            elif char == 'l' and not self.clawlift:
                 self.start_manual_control('clawlift')
                 self.clawlift = True
-            elif char == 'o':
+            elif char == 'o' and not self.clawlower:
                 self.start_manual_control('clawlower')
                 self.clawlower = True
 
