@@ -37,11 +37,11 @@ class LineFollower(RobotBehaviourThread):
                 self.set_turning_to(-first_turn)
             else:
                 self.move(first_turn, turnSpeed)
-                time.sleep(turnTimer * 1.1)
+                time.sleep(turnTimer * 1.2)
                 self.move(straight, moveSpeed)
                 time.sleep(0.3)
                 self.move(0, -moveSpeed)
-                time.sleep(1)
+                time.sleep(2)
                 self.move(left, turnSpeed)
                 time.sleep(1.5)
                 self.set_turning_to(straight)
