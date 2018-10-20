@@ -1,15 +1,14 @@
 import threading
 from ev3dev2.motor import LargeMotor, OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D, SpeedPercent, MoveTank, MoveSteering
 from ev3dev2.sensor import INPUT_1, INPUT_2, INPUT_3, INPUT_4
-from ev3dev2.sensor.lego import TouchSensor, LightSensor, InfraredSensor, ColorSensor, GyroSensor
+from ev3dev2.sensor.lego import TouchSensor, LightSensor, UltrasonicSensor, ColorSensor, GyroSensor
 from ev3dev2.led import Leds
 
 class RobotBehaviourThread(threading.Thread):
     move_steering = MoveSteering(OUTPUT_B, OUTPUT_C)
     color_sensor = ColorSensor(INPUT_4)
     color_sensor.mode = ColorSensor.MODE_COL_REFLECT
-    infrared_sensor = InfraredSensor(INPUT_1)
-    infrared_sensor.mode = 'IR-PROX'
+    ultrasonic_sensor = UltrasonicSensor(INPUT_1)
     gyroscope = GyroSensor(INPUT_3)
     #touch_sensor = TouchSensor(INPUT_2)
 
