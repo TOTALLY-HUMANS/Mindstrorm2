@@ -1,6 +1,7 @@
-from ev3dev2.motor import OUTPUT_B, OUTPUT_C, MoveSteering, SpeedPercent
+from ev3dev2.motor import OUTPUT_A, OUTPUT_B, OUTPUT_C, MoveSteering, SpeedPercent, Motor
 
 class ManualControl():
+    claw_movement = Motor(OUTPUT_A)
     move_steering = MoveSteering(OUTPUT_B, OUTPUT_C)
     direction = None
 
@@ -31,3 +32,7 @@ class ManualControl():
 
     def stop_movement(self):
         self.move_steering.off(brake=True)
+
+    def claw_control(self, speed, seconds):
+        print("Claw control")
+        self.claw_movement.on_for_seconds(speed, seconds)
