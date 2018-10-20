@@ -10,6 +10,7 @@ class ManualControl():
         self.start_direction(direction)
 
     def start_direction(self, direction):
+        self.stop_direction(self.direction)
         self.direction = direction
         if self.direction == 'up':
             self.move(0, 70)
