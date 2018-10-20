@@ -1,8 +1,10 @@
 import rpyc
 from pynput import keyboard
+from pynput.keyboard import Key
 
 class Controller():
     conn = None
+    mode = None
 
     def __init__(self):
         while self.conn is None:
@@ -25,32 +27,50 @@ class Controller():
             char = key.char
             print("Pressed " + char)
             if char == '1':
-                print("Starting line follower...")
-                rpyc.async_(self.conn.root.change_mode)('Line Follower')
-                print("Started line follower")
+                self.change_mode('Line Follower')
             elif char == '2':
-                print("Starting forest crawler...")
-                rpyc.async_(self.conn.root.change_mode)('Forest Crawler')
-                print("Started forest crawler")
+                self.change_mode('Forest Crawler')
             elif char == 'q':
-                print("Stopping...")
-                rpyc.async_(self.conn.root.change_mode)('Stop')
-                print("Stopped")
+                self.change_mode('Stop')
                 return False
             elif char == 'w':
-                print("Pausing...")
-                rpyc.async_(self.conn.root.change_mode)('Pause')
-                print("Paused")
-                
+                self.change_mode('Pause')
+
         except AttributeError as e:
-            # key is special key
-            print(e)
-            pass
+            if e.key == Key.up:
+                self.start_manual_control('up')
+            elif e.key == Key.down:
+                self.start_manual_control('down')
+            elif e.key == Key.left:
+                self.start_manual_control('left')
+            elif e.key == Key.right:
+                self.start_manual_control('right')
 
     def on_release(self, key):
-        #
-        print(key)
-        pass
+        if e.key == Key.up:
+            self.stop_manual_control('up')
+        elif e.key == Key.down:
+            self.stop_manual_control('down')
+        elif e.key == Key.left:
+            self.stop_manual_control('left')
+        elif e.key == Key.right:
+            self.stop_manual_control('right')
+
+    def change_mode(self, mode):
+        self.mode = mode
+        print("Starting: " + mode)
+        rpyc.async_(self.conn.root.change_mode)(mode)
+        print("Started: " + mode)
+
+    def start_manual_control(self, direction):
+        if self.mode != 'Manual Control':
+            change_mode(self, 'Manual Control', direction)
+        else:
+            rpyc.async_(self.conn.root.start_direction)(direction)
+
+    def stop_manual_control(self, direction):
+        rpyc.async_(self.conn.root.stop_direction)(direction)
+
 
 if __name__ == '__main__':
     c = Controller()
