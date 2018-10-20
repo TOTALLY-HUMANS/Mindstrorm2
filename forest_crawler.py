@@ -6,24 +6,33 @@ class ForestCrawler(RobotBehaviourThread):
 
     def run(self):
         print("Starting forest crawler...")
+        scan_surroundings = True
 
-        #while not self.stopped():
+        while not self.stopped():
+            if scan_surroundings:
+                angles, distances = self.scan_room()
+                print("DONE SCANNING ROOM...")
+                
+                print(angles)
+                print(distances)
 
-        angles, distances = self.scan_room()
-        print("DONE SCANNING ROOM...")
-        
-        print(angles)
-        print(distances)
+                angle_to_use = self.find_longest_open_space(angles, distances)
+                print("FOOFOOFOO")
+                print(angle_to_use)
+                angle_to_use = self.gyroscope.angle - angle_to_use
+                self.stop_movement()
+                self.turn_degrees(abs(angle_to_use), angle_to_use)
 
-        angle_to_use = self.find_longest_open_space(angles, distances)
-        print("FOOFOOFOO")
-        print(angle_to_use)
-        angle_to_use = self.gyroscope.angle - angle_to_use
-        self.stop_movement()
-        self.turn_degrees(abs(angle_to_use), angle_to_use)
+                scan_surroundings = False
+                move(0, 40)
 
+            if self.wall_near():
+                self.stop_movement()
+                move(0, 40)
+                sleep(0.5)
+                self.stop_movement()
+                scan_surroundings = True
 
-            
             
 
     def scan_room(self):
@@ -36,11 +45,16 @@ class ForestCrawler(RobotBehaviourThread):
 
         while self.gyroscope.angle < initial_angle + 180 and self.gyroscope.angle > initial_angle - 180:
             angles.append(self.gyroscope.angle)
-            distances.append(self.infrared_sensor.distance(1))
+            distances.append(self.infrared_sensor.proximity)
 
         self.stop_movement()
 
         return angles, distances
+
+
+    def wall_near(self):
+        return self.infrared_sensor.proximity < 5
+
 
     def find_longest_open_space(self, angles, distances):
         
