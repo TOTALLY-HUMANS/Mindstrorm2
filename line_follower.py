@@ -24,17 +24,17 @@ class LineFollower(RobotBehaviourThread):
             if self.line_found():
                 if self.turning == left:
                     first_turn = left
-                elif self.turning == right
+                elif self.turning == right:
                     first_turn = right
 
                 self.move(straight, moveSpeed)
                 self.set_turning_to(straight)
-            elif (not self.turning == right) and (self.turning == straight or (time.time() - self.started_turning) <= turnTimer):
-                self.move(left, turnSpeed)
-                self.set_turning_to(left)
+            elif (not self.turning == -first_turn) and (self.turning == straight or (time.time() - self.started_turning) <= turnTimer):
+                self.move(first_turn, turnSpeed)
+                self.set_turning_to(first_turn)
             else:
-                self.move(right, turnSpeed)
-                self.set_turning_to(right)
+                self.move(-first_turn, turnSpeed)
+                self.set_turning_to(-first_turn)
         self.callback("Forest Crawler")
 
     def set_turning_to(self, turn):
