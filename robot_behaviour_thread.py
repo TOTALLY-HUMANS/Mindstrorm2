@@ -23,9 +23,6 @@ class RobotBehaviourThread(threading.Thread):
 
     def stopped(self):
         return self._stop_event.is_set()
-    
-    def line_found(self):
-        return self.color_sensor.reflected_light_intensity < 50 
 
     def move(self, angle, speed):
         self.move_steering.on(angle, SpeedPercent(speed))
