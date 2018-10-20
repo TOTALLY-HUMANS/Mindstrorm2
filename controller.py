@@ -34,6 +34,8 @@ class Controller():
                 self.change_mode('Line Follower')
             elif char == '2':
                 self.change_mode('Forest Crawler')
+            elif char == '5':
+                self.change_mode('Battle Mode')
             elif char == 'q':
                 self.change_mode('Stop')
                 return False

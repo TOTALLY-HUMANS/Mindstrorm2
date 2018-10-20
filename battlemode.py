@@ -6,8 +6,7 @@ from time import sleep
 class BattleMode(RobotBehaviourThread):
 
     leds = Leds()
-    enemy_contact = False
-    touch_sensor_active = False
+    enemy_in_range = False
 
     def __init__(self, callback=None):
         super().__init__(callback)
@@ -18,13 +17,34 @@ class BattleMode(RobotBehaviourThread):
         print("Battlemode engaged...")
 
         self.enter_thunderdome()
+        self.move(30, 60)
 
-        # Drive circles until enemy contact
-        while not enemy_contact():
-            self.move(30, 60)
-            self.check_touch_sensor_status()
-            if (self.touch_sensor_active):
-                self.charge()
+        while not self.stopped():
+            # Drive circles until enemy contact
+            if self.check_touch_sensor_status() and not enemy_in_range:
+                self.move(0, 99)
+                enemy_in_range = True
+
+            if enemy_in_range:
+                if not self.check_touch_sensor_status():
+                    self.stop_movement()
+                    self.move(0, -30)
+                    sleep(1)
+                    self.stop_movement()
+                    enemy_in_range = False
+                    self.move(30, 60)
+
+            if self.edge_detected():
+                self.stop_movement()
+
+                for i in range(3):
+                    self.turn_degrees(90, 1)
+                    if not self.edge_detected():
+                        break
+                
+                
+
+            
             
     def enter_thunderdome(self):
         # Enter battle positions
@@ -34,33 +54,14 @@ class BattleMode(RobotBehaviourThread):
         self.stop_movement():
         print("In position")
 
-
-    def charge(self):
-        # Charge forward until the motion sensor is no longer active
-        self.stop_movement():
-        sleep(1)
-        while (self.touch_sensor_active)
-            self.move(0, 90)
-
-        # Robot must turn so that it faces the edge so that it does not
-        # reverse over the edge
-
-        self.move(0, -30)
-        sleep(5)
-        self.stop_movement():
-
     def check_touch_sensor_status(self):
-        # Check touch sensor values
-        if (self.color_sensor.reflected_light_intensity < 50 ):
-                self.touch_sensor_active = True
-                print("Target accuired")
-            else:
-                self.touch_sensor_active = False
+        return self.infrared_sensor.proximity < 5
 
-    def edge_tracker(self):
+    def edge_detected(self):
         # Track the edges of the platform
-
-
+        self.color_sensor.mode = 'COL-REFLECT'
+        return self.color_sensor.reflected_light_intensity < 5
+        
 
     def change_color(self):
         # Change LED to colors suitable for battle
