@@ -7,14 +7,13 @@ from ev3dev2.sensor.lego import TouchSensor, LightSensor, InfraredSensor, ColorS
 from ev3dev2.led import Leds
 
 class RobotService(rpyc.Service):
-    state = 1
     drive = MoveSteering(OUTPUT_B, OUTPUT_C)
     sensor = ColorSensor(INPUT_4)
     sensor.mode = ColorSensor.MODE_COL_REFLECT
     
     def exposed_line_follower(self):
         self.move(0, 60)
-        while state == 1:
+        while True:
             if (self.line_found()):
                 self.move(0, 60)
             else:
@@ -28,9 +27,6 @@ class RobotService(rpyc.Service):
             
     def stop(self):
         self.move(0,0)
-
-    def change_state(state):
-        state = state
 
 if __name__ == '__main__':
     s = ThreadedServer(RobotService, port=18812)
