@@ -39,11 +39,11 @@ class Controller():
         except AttributeError as e:
             if e.key == Key.up:
                 self.start_manual_control('up')
-            elif: e.key == Key.down:
+            elif e.key == Key.down:
                 self.start_manual_control('down')
-            elif: e.key == Key.left:
+            elif e.key == Key.left:
                 self.start_manual_control('left')
-            elif: e.key == Key.right:
+            elif e.key == Key.right:
                 self.start_manual_control('right')
 
     def on_release(self, key):
