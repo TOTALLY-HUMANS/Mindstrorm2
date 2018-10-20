@@ -24,11 +24,11 @@ class ForestCrawler(RobotBehaviourThread):
                 self.turn_degrees(abs(angle_to_use), angle_to_use)
 
                 scan_surroundings = False
-                move(0, 40)
+                move(0, 30)
 
             if self.wall_near():
                 self.stop_movement()
-                move(0, 40)
+                move(0, -20)
                 sleep(0.5)
                 self.stop_movement()
                 scan_surroundings = True
@@ -41,7 +41,7 @@ class ForestCrawler(RobotBehaviourThread):
 
         self.turn_degrees(90, -1)
         initial_angle = self.gyroscope.angle
-        self.move(100, 50)
+        self.move(100, 20)
 
         while self.gyroscope.angle < initial_angle + 180 and self.gyroscope.angle > initial_angle - 180:
             angles.append(self.gyroscope.angle)

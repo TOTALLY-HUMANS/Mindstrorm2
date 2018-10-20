@@ -32,7 +32,7 @@ class RobotBehaviourThread(threading.Thread):
         initial_angle = self.gyroscope.angle
 
         direction_actual = -100 if direction <= 0 else 100        
-        self.move(direction_actual, 40)
+        self.move(direction_actual, 25)
 
         print("rotating")
         print(initial_angle)
