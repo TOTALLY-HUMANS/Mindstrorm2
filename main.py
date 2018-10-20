@@ -33,6 +33,7 @@ class RobotService(rpyc.Service):
 
     def exposed_start_direction(self, direction):
         if self.mode == 'Manual Control':
+            print(direction)
             self.thread.start_direction(direction)
 
     def exposed_stop_direction(self, direction):
