@@ -66,6 +66,7 @@ class RobotService(rpyc.Service):
         elif self.mode == 'Battle Mode':
             print("Creating Battle Mode...")
             self.thread = BattleMode(self.change_mode)
+            print("FOOBAR")
             self.thread.start()
         elif self.mode == 'Pause':
             print("Pausing...")
