@@ -56,7 +56,7 @@ class BattleMode(RobotBehaviourThread):
         print("Entering Thunderdome")
         self.move(0, 30)
         sleep(5)
-        self.stop_movement():
+        self.stop_movement()
         print("In position")
 
     def check_touch_sensor_status(self):
