@@ -19,7 +19,7 @@ class ForestCrawler(RobotBehaviourThread):
         angles = []
         distances = []
         print("turning 90...")
-        self.turn_degrees(90)
+        self.turn_degrees(90, -1)
         print("turned 90")
         initial_angle = self.gyroscope.angle
         self.move(100, 50)
