@@ -33,12 +33,12 @@ class RobotBehaviourThread(threading.Thread):
     def turn_degrees(self, degrees, direction):
         initial_angle = self.gyroscope.angle
 
-        direction_actual = -100 if degrees <= 0 else 100        
+        direction_actual = -100 if direction <= 0 else 100        
         self.move(direction_actual, 40)
 
         print("rotating")
         while self.gyroscope.angle < initial_angle + degrees and self.gyroscope.angle > initial_angle - degrees:
-            #do nothing
+            print(self.gyroscope.angle)
         print("done rotating")
         self.stop_movement()
 
