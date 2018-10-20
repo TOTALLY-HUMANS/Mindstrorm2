@@ -1,16 +1,16 @@
 import threading
 from ev3dev2.motor import LargeMotor, OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D, SpeedPercent, MoveTank, MoveSteering
 from ev3dev2.sensor import INPUT_1, INPUT_2, INPUT_3, INPUT_4
-from ev3dev2.sensor.lego import TouchSensor, LightSensor, InfraredSensor, ColorSensor
+from ev3dev2.sensor.lego import TouchSensor, LightSensor, InfraredSensor, ColorSensor, GyroSensor
 from ev3dev2.led import Leds
 
 class RobotBehaviourThread(threading.Thread):
     move_steering = MoveSteering(OUTPUT_B, OUTPUT_C)
     color_sensor = ColorSensor(INPUT_4)
     color_sensor.mode = ColorSensor.MODE_COL_REFLECT
-    gyroscope = GyroSensor()
-    ultrasonic_sensor = UltrasonicSensor(INPUT_1)
-
+    infrared_sensor = InfraredSensor(INPUT_1)
+    gyroscope = GyroSensor(INPUT_3)
+    #touch_sensor = TouchSensor(INPUT_2)
 
     def __init__(self, callback=None):
         super().__init__()
@@ -30,10 +30,10 @@ class RobotBehaviourThread(threading.Thread):
     def move(self, angle, speed):
         self.move_steering.on(angle, SpeedPercent(speed))
 
-    def turn_degrees(self, degrees, direction):
-        actual_direction = degrees <= 0 ? -100 : 100
-        self.move(actual_direction, 50)
-        gyroscope.wait_until_angle_changed_by(degrees)
+    def turn_degrees(self, degrees):
+        direction = -100 if degrees <= 0 else 100
+        self.move(direction, 50)
+        self.gyroscope.wait_until_angle_changed_by(degrees)
         self.stop_movement()
 
     def stop_movement(self):

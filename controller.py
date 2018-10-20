@@ -37,34 +37,36 @@ class Controller():
                 self.change_mode('Pause')
 
         except AttributeError as e:
-            if e.key == Key.up:
+            print(key)
+            if key == Key.up:
                 self.start_manual_control('up')
-            elif e.key == Key.down:
+            elif key == Key.down:
                 self.start_manual_control('down')
-            elif e.key == Key.left:
+            elif key == Key.left:
                 self.start_manual_control('left')
-            elif e.key == Key.right:
+            elif key == Key.right:
                 self.start_manual_control('right')
 
     def on_release(self, key):
-        if e.key == Key.up:
+        print(key)
+        if key == Key.up:
             self.stop_manual_control('up')
-        elif e.key == Key.down:
+        elif key == Key.down:
             self.stop_manual_control('down')
-        elif e.key == Key.left:
+        elif key == Key.left:
             self.stop_manual_control('left')
-        elif e.key == Key.right:
+        elif key == Key.right:
             self.stop_manual_control('right')
 
-    def change_mode(self, mode):
+    def change_mode(self, mode, args=None):
         self.mode = mode
         print("Starting: " + mode)
-        rpyc.async_(self.conn.root.change_mode)(mode)
+        rpyc.async_(self.conn.root.change_mode)(mode, args)
         print("Started: " + mode)
 
     def start_manual_control(self, direction):
         if self.mode != 'Manual Control':
-            change_mode(self, 'Manual Control', direction)
+            self.change_mode('Manual Control', direction)
         else:
             rpyc.async_(self.conn.root.start_direction)(direction)
 
