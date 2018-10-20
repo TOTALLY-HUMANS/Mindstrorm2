@@ -2,8 +2,15 @@ import rpyc
 from pynput import keyboard
 
 class Controller():
+    conn = None
+    doing = None
+
     def __init__(self):
-        self.conn = rpyc.connect('192.168.2.2', port=18812)
+        while conn is None:
+            try:
+                self.conn = rpyc.connect('192.168.2.2', port=18812)
+            except ConnectionRefusedError:
+                pass
 
     def start(self):
         self.listener = keyboard.Listener(
@@ -13,17 +20,15 @@ class Controller():
         self.listener.start()
         self.listener.join()
 
-    def stop(self):
-        self.listener.stop()
-
     def on_press(self, key):
-        self.stop()
+        if doing and not doing.ready:
+            return
+
         try:
-            self.conn.root.line_follower()
+            doing = rpyc.asyn(self.conn.root.line_follower())
         except AttributeError:
             # key is special key
             pass
-        self.start()
 
     def on_release(self, key):
         #
