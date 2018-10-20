@@ -8,6 +8,8 @@ class RobotBehaviourThread(threading.Thread):
     move_steering = MoveSteering(OUTPUT_B, OUTPUT_C)
     color_sensor = ColorSensor(INPUT_4)
     color_sensor.mode = ColorSensor.MODE_COL_REFLECT
+    gyroscope = GyroSensor()
+
 
     def __init__(self, callback=None):
         super().__init__()
@@ -26,6 +28,12 @@ class RobotBehaviourThread(threading.Thread):
 
     def move(self, angle, speed):
         self.move_steering.on(angle, SpeedPercent(speed))
-            
+
+    def turn_degrees(self, degrees):
+        direction = degrees <= 0 ? -100 : 100
+        self.move(direction, 50)
+        gyroscope.wait_until_angle_changed_by(degrees)
+        self.stop_movement()
+
     def stop_movement(self):
         self.move_steering.off(brake=True)
