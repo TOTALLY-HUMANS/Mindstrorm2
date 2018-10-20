@@ -16,10 +16,13 @@ class RobotService(rpyc.Service):
         if self.mode == mode:
             return
 
-        self.mode = mode
         if self.thread is not None:
-            self.thread.stop()
-            self.thread.join()
+            if self.mode != 'Manual Control':
+                self.mode = mode
+                self.thread.stop()
+                self.thread.join()
+            else:
+                self.thread.stop_direction(self.thread.direction)
 
         self.change_mode(mode, args)
 
