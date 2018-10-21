@@ -8,6 +8,9 @@ class DiscTraveler(RobotBehaviourThread):
     def run(self):
         print("Starting disc traveler...")
 
+
+        print(self.ultrasonic_sensor.distance_centimeters)
+
         initial_angle = self.gyroscope.angle
 
         while not self.stopped():
