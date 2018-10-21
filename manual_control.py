@@ -13,13 +13,13 @@ class ManualControl():
         self.stop_direction(self.direction)
         self.direction = direction
         if self.direction == 'up':
-            self.move(0, 70)
+            self.move(0, 100)
         elif self.direction == 'down':
-            self.move(0, -70)
+            self.move(0, -100)
         elif self.direction == 'left':
-            self.move(-90, 70)
+            self.move(-90, 100)
         elif self.direction == 'right':
-            self.move(90, 70)
+            self.move(90, 100)
         elif self.direction == 'clawlift':
             print("clawlift")
             self.claw_control(-20)

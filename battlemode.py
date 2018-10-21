@@ -18,35 +18,38 @@ class BattleMode(RobotBehaviourThread):
         print("Battlemode engaged...")
 
         self.enter_thunderdome()
-        self.move(-25, 60)
+        self.move(100, 30)
+        sleep(1)
+        self.move(-30, 80)
 
         while not self.stopped():
+            edge_detected = self.edge_detected()
+            touch_sensor_status = self.check_touch_sensor_status()
+
             # Drive circles until enemy contact
-            if self.check_touch_sensor_status() and not enemy_in_range:
+            if touch_sensor_status and not enemy_in_range and not edge_detected:
                 print("Enemy in range")
                 self.move(0, 99)
                 enemy_in_range = True
 
-            if enemy_in_range:
-                if not self.check_touch_sensor_status():
+            if enemy_in_range and not edge_detected:
+                if not touch_sensor_status:
                     print("ENEMY ELIMINATED")
                     self.stop_movement()
                     self.move(0, -30)
-                    sleep(1)
+                    sleep(2)
                     self.stop_movement()
                     enemy_in_range = False
-                    self.move(30, 60)
 
-            if self.edge_detected():
+            if edge_detected:
                 print("EDGE DETECTED")
                 self.stop_movement()
                 self.move(0, -45)
                 sleep(1)
+                self.turn_degrees(90, 1)
 
-                for i in range(3):
-                    self.turn_degrees(90, 1)
-                    if not self.edge_detected():
-                        break
+            if not enemy_in_range and not edge_detected:
+                self.move(-30, 80)
                 
                 
 
@@ -70,8 +73,7 @@ class BattleMode(RobotBehaviourThread):
         # return self.color_sensor.reflected_light_intensity < 5
 
         self.color_sensor.mode = 'COL-COLOR'
-        i = 1
-        for i in range(3):
+        for j in range(3):
             edge_color = self.get_color()
             if (edge_color == 0):
                 return True
