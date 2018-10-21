@@ -6,7 +6,6 @@ class SlopeSearcher(RobotBehaviourThread):
     foundYellow = False
     foundBlue = False
     foundGreen = False
-    foundAll = False
 
     foundTarget = 0
     foundSecondTime = False
@@ -32,8 +31,8 @@ class SlopeSearcher(RobotBehaviourThread):
             self.foundBlue = True
         elif color == self.green:
             self.foundGreen = True
-        elif color == self.white and self.foundRed and self.foundYellow and self.foundBlue and self.foundGreen:
-            self.foundAll = True
+
+        self.foundAll = (self.foundRed and self.foundYellow and self.foundBlue and self.foundGreen)
 
     def run(self):
         print("Starting line follower...")
@@ -53,8 +52,14 @@ class SlopeSearcher(RobotBehaviourThread):
             print(color)
             if not self.foundAll:
                 self.update_found_colors(color)
+                if self.foundAll:
+                    self.move(straight, moveSpeed)
+                    self.set_turning_to(straight)
+                    self.sleep(1)
+                    continue
             elif (self.foundTarget == 0) and (color == self.red or color == self.yellow or color == self.blue or color == self.green):
                 self.foundTarget = color
+                self.set_turning_to(straight)
                 self.turn_degrees(180, 1)
                 continue
 
