@@ -20,20 +20,21 @@ class BattleMode(RobotBehaviourThread):
         self.enter_thunderdome()
         self.move(100, 30)
         sleep(1)
-        self.move(-30, 80)
+        self.move(-100, 60)
 
         while not self.stopped():
             edge_detected = self.edge_detected()
             touch_sensor_status = self.check_touch_sensor_status()
+            distance_to_object = self.ultrasonic_sensor.distance_centimeters
 
             # Drive circles until enemy contact
-            if touch_sensor_status and not enemy_in_range and not edge_detected:
+            if (touch_sensor_status or distance_to_object < 15) and not enemy_in_range and not edge_detected:
                 print("Enemy in range")
                 self.move(0, 99)
                 enemy_in_range = True
 
             if enemy_in_range and not edge_detected:
-                if not touch_sensor_status:
+                if not touch_sensor_status and not distance_to_object < 15:
                     print("ENEMY ELIMINATED")
                     self.stop_movement()
                     self.move(0, -30)
@@ -46,10 +47,10 @@ class BattleMode(RobotBehaviourThread):
                 self.stop_movement()
                 self.move(0, -45)
                 sleep(1)
-                self.turn_degrees(90, 1)
+                self.turn_degrees(135, 1)
 
             if not enemy_in_range and not edge_detected:
-                self.move(-30, 80)
+                self.move(-100, 60)
                 
                 
 
@@ -58,7 +59,7 @@ class BattleMode(RobotBehaviourThread):
     def enter_thunderdome(self):
         # Enter battle positions
         print("Entering Thunderdome")
-        self.move(0, 30)
+        self.move(0, 45)
         sleep(7)
         self.stop_movement()
         print("In position")
