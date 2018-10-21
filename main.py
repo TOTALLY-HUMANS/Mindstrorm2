@@ -10,6 +10,8 @@ from disc_traveler import DiscTraveler
 from slope_searcher import SlopeSearcher
 from manual_control import ManualControl
 from battlemode import BattleMode
+import sys
+sys.stdout = sys.__stdout__
 
 class RobotService(rpyc.Service):
     mode = None
@@ -33,6 +35,7 @@ class RobotService(rpyc.Service):
 
     def exposed_start_direction(self, direction):
         if self.mode == 'Manual Control':
+            print(direction)
             self.thread.start_direction(direction)
 
     def exposed_stop_direction(self, direction):

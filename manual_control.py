@@ -21,9 +21,11 @@ class ManualControl():
         elif self.direction == 'right':
             self.move(90, 70)
         elif self.direction == 'clawlift':
-            self.claw_control(40)
+            print("clawlift")
+            self.claw_control(-20)
         elif self.direction == 'clawlower':
-            self.claw_control(40)
+            print("clawlower")
+            self.claw_control(20)
 
     def stop_direction(self, direction):
         if direction and self.direction == direction:
@@ -42,8 +44,8 @@ class ManualControl():
         self.move_steering.off(brake=True)
 
     def claw_control(self, speed):
-        print("Claw control")
-        self.claw_movement.on(speed=speed)
+        print("Claw control " + str(speed))
+        self.claw_movement.on(speed)
 
     def stop_claw(self):
         self.claw_movement.off(brake=True)
