@@ -50,13 +50,13 @@ class SlopeSearcher(RobotBehaviourThread):
 
         while not self.stopped():
             color = self.get_color()
-            print(color)
+            #print(color)
             if not self.foundAll:
                 self.update_found_colors(color)
                 if self.foundAll:
                     self.move(straight, moveSpeed)
                     self.set_turning_to(straight)
-                    self.sleep(1)
+                    time.sleep(1)
                     continue
             elif (self.foundTarget == 0) and (color == self.red or color == self.yellow or color == self.blue or color == self.green):
                 self.foundTarget = color

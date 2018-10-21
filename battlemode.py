@@ -17,7 +17,7 @@ class BattleMode(RobotBehaviourThread):
         self.change_color()
         print("Battlemode engaged...")
 
-        self.enter_thunderdome()
+        #self.enter_thunderdome()
         self.move(100, 30)
         sleep(1)
         self.move(-60, 60)
