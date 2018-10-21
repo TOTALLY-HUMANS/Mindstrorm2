@@ -12,7 +12,7 @@ class DiscTraveler(RobotBehaviourThread):
 
         while not self.stopped():
 
-            if not self.ultrasonic_sensor.distance_centimeters < 5:
+            if not self.ultrasonic_sensor.distance_centimeters < 5 && not self.touch_sensor.is_pressed:
                 angle = self.gyroscope.angle
                 delta = (initial_angle - angle) % 360
 
