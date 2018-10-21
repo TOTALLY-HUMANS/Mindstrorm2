@@ -6,6 +6,7 @@ class SlopeSearcher(RobotBehaviourThread):
     foundYellow = False
     foundBlue = False
     foundGreen = False
+    foundAll = False
 
     foundTarget = 0
     foundSecondTime = False
