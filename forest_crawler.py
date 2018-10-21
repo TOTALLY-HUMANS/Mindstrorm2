@@ -53,6 +53,7 @@ class ForestCrawler(RobotBehaviourThread):
             angles.append(self.gyroscope.angle)
             distances.append(self.ultrasonic_sensor.distance_centimeters)
 
+        print("HERE HERE")
         self.stop_movement()
 
         return angles, distances
