@@ -20,7 +20,7 @@ class BattleMode(RobotBehaviourThread):
         self.enter_thunderdome()
         self.move(100, 60)
         sleep(1)
-        self.move(-25, 60)
+        self.move(-30, 80)
 
         while not self.stopped():
             edge_detected = self.edge_detected()
@@ -40,7 +40,6 @@ class BattleMode(RobotBehaviourThread):
                     sleep(2)
                     self.stop_movement()
                     enemy_in_range = False
-                    self.move(-25, 60)
 
             if edge_detected:
                 print("EDGE DETECTED")
@@ -50,7 +49,7 @@ class BattleMode(RobotBehaviourThread):
                 self.turn_degrees(90, 1)
 
             if not enemy_in_range and edge_detected:
-                self.move(-25, 60)
+                self.move(-30, 80)
                 
                 
 
