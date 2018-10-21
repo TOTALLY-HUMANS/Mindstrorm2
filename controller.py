@@ -79,7 +79,6 @@ class Controller():
             elif char == 'o':
                 self.stop_manual_control('clawlower')
                 self.clawlower = False
-
         except AttributeError as e:
             if key == Key.up:
                 self.stop_manual_control('up')
