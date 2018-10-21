@@ -10,6 +10,8 @@ from disc_traveler import DiscTraveler
 from slope_searcher import SlopeSearcher
 from manual_control import ManualControl
 from battlemode import BattleMode
+import sys
+sys.stdout = sys.__stdout__
 
 class RobotService(rpyc.Service):
     mode = None
