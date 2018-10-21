@@ -49,7 +49,7 @@ class ForestCrawler(RobotBehaviourThread):
         initial_angle = self.gyroscope.angle
         self.move(100, 15)
 
-        while self.gyroscope.angle < initial_angle + 180 and self.gyroscope.angle > initial_angle - 180:
+        while self.gyroscope.angle < initial_angle + 180 and self.gyroscope.angle > (initial_angle - 180):
             angles.append(self.gyroscope.angle)
             distances.append(self.ultrasonic_sensor.distance_centimeters)
 
