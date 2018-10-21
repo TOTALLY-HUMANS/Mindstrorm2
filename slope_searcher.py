@@ -56,7 +56,7 @@ class SlopeSearcher(RobotBehaviourThread):
                 self.turn_degrees(180, 1)
                 continue
 
-            if color == 6:
+            if color == 6 or (self.foundTarget == 0 and (color == self.red or color == self.yellow or color == self.blue or color == self.green)):
                 if self.turning == left or first_turn_always_left:
                     first_turn = left
                     if first_turn_always_left and (time.time() - self.started_turning) > 1.4:
@@ -66,8 +66,8 @@ class SlopeSearcher(RobotBehaviourThread):
                 self.move(straight, moveSpeed)
                 self.set_turning_to(straight)
             elif (self.foundTarget != 0) and color == self.foundTarget:
-                # self.move(first_turn, turnSpeed)
-                # time.sleep(turnTimer * 1.3)
+                self.move(left, turnSpeed)
+                time.sleep(turnSpeed)
                 self.move(straight, moveSpeed)
                 time.sleep(5)
 
