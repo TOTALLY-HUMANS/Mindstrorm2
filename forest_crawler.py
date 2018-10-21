@@ -14,12 +14,6 @@ class ForestCrawler(RobotBehaviourThread):
                 angles, distances = self.scan_room()
                 print("DONE SCANNING ROOM...")
 
-                try:
-                    raise Exception(angles)
-                except:
-                    print(angles)
-
-
                 angle_to_use = self.find_longest_open_space(angles, distances)
                 print("FOOFOOFOO")
                 print(angle_to_use)

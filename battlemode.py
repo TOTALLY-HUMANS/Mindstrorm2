@@ -18,6 +18,8 @@ class BattleMode(RobotBehaviourThread):
         print("Battlemode engaged...")
 
         self.enter_thunderdome()
+        self.move(100, 60)
+        sleep(1)
         self.move(-25, 60)
 
         while not self.stopped():
@@ -32,10 +34,10 @@ class BattleMode(RobotBehaviourThread):
                     print("ENEMY ELIMINATED")
                     self.stop_movement()
                     self.move(0, -30)
-                    sleep(1)
+                    sleep(2)
                     self.stop_movement()
                     enemy_in_range = False
-                    self.move(30, 60)
+                    self.move(-25, 60)
 
             if self.edge_detected():
                 print("EDGE DETECTED")
@@ -47,6 +49,8 @@ class BattleMode(RobotBehaviourThread):
                     self.turn_degrees(90, 1)
                     if not self.edge_detected():
                         break
+                
+                self.move(-25, 60)
                 
                 
 
@@ -70,8 +74,7 @@ class BattleMode(RobotBehaviourThread):
         # return self.color_sensor.reflected_light_intensity < 5
 
         self.color_sensor.mode = 'COL-COLOR'
-        i = 1
-        for i in range(3):
+        for j in range(3):
             edge_color = self.get_color()
             if (edge_color == 0):
                 return True
