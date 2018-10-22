@@ -61,7 +61,8 @@ class SlopeSearcher(RobotBehaviourThread):
             elif (self.foundTarget == 0) and (color == self.red or color == self.yellow or color == self.blue or color == self.green):
                 self.foundTarget = color
                 self.set_turning_to(straight)
-                self.turn_degrees(180, 1)
+                self.move(90, 20)
+                time.sleep(3.4)
                 continue
             elif (self.foundTarget != 0) and color == self.foundTarget:
                 self.foundSecondTime = True

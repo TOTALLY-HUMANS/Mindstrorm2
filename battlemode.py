@@ -46,7 +46,8 @@ class BattleMode(RobotBehaviourThread):
                 self.stop_movement()
                 self.move(0, -45)
                 sleep(1)
-                self.turn_degrees(135, 1)
+                self.move(90, 50)
+                sleep(1.5)
 
             if not enemy_in_range and not edge_detected:
                 self.move(-60, 60)

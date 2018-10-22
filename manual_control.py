@@ -17,9 +17,9 @@ class ManualControl():
         elif self.direction == 'down':
             self.move(0, -100)
         elif self.direction == 'left':
-            self.move(-90, 100)
+            self.move(-90, 80)
         elif self.direction == 'right':
-            self.move(90, 100)
+            self.move(90, 80)
         elif self.direction == 'clawlift':
             print("clawlift")
             self.claw_control(-20)
